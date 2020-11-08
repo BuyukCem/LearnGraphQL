@@ -1,0 +1,30 @@
+version: '3.6'
+services:
+  node:
+    container_name: GraphQL-node
+    image: 'node:latest'
+    working_dir: /home/node/app
+    env_file:
+      - .env
+    command:
+      - /bin/sh
+      - '-c'
+      - 'npm install && npm start'
+    links:
+      - mongo
+    ports:
+      - '${PORT}:${PORT}'
+    volumes:
+      - './:/home/node/app'
+    networks:
+      - API_Networks
+  mongo:
+    container_name: GraphQL-mongo
+    image: 'mongo:4.0.7'
+    ports:
+      - '27017:27017'
+    networks:
+      - API_Networks
+networks:
+  API_Networks:
+    driver: bridge
