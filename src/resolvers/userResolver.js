@@ -18,6 +18,7 @@ export default {
 
     Query: {
         user: async (parent, { id }, { models: { userModel }, me }, info) => {
+
             if (!me) {
                 throw new AuthenticationError('You are not authenticated');
             }

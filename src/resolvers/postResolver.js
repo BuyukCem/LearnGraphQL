@@ -1,8 +1,9 @@
 import { AuthenticationError } from 'apollo-server';
-
+// contient chque type  dans le schema qui ont besoin de resolver
 export default {
     Query: {
         post: async (parent, { id }, { models: { postModel }, me }, info) => {
+
             if (!me) {
                 throw new AuthenticationError('You are not authenticated');
             }
@@ -19,6 +20,7 @@ export default {
     },
     Mutation: {
         createPost: async (parent, { title, content }, { models: { postModel }, me }, info) => {
+            console.log(me)
             if (!me) {
                 throw new AuthenticationError('You are not authenticated');
             }
